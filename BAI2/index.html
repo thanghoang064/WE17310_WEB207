@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- nhúng thư viện angular js vào web -->
+    <script src="libs/angular.min.js"></script>
+</head>
+<body ng-app="myapp">
+    <!-- định nghĩa nơi controller sẽ render dữ liệu ra -->
+    <div ng-controller="demoController">
+        {{ welcome }}
+    </div>
+    <div ng-controller="infoController">
+        <table border="1">
+            <tr>
+                <td>Tên</td>
+                <td>Tuổi</td>
+                <td>SDT</td>
+            </tr>
+            <tr ng-repeat="i in info">
+                <td>{{ i.name }}</td>
+                <td>{{ i.age }}</td>
+                <td>{{ i.phone }}</td>
+            </tr>
+
+
+
+        </table>
+    </div>
+</body>
+<script>
+    //khai báo 1 hàm trong javascript
+    //viết chuẩn
+    function myFunc($scope) { // tất các hàm để phải có tham số mặc định $scope
+        //xử lý việc render dữ liệu ra khu vực demoController
+        $scope.welcome = "Hello world"; // sau dấu chấm của  $scope sẽ là biến mình khai báo
+        // để render dữ liệu lên
+    }
+    //khởi tạo angular js và định nghĩa vùng sẽ sử dụng angular js
+    var app = angular.module("myapp",[]);
+    // map demoController với hàm myFunc để xử lý render dữ liệu ra
+    app.controller("demoController",myFunc);
+    //viết tắt
+    app.controller("infoController",function ($scope) {
+        // $scope.name = "Nguyễn văn a";
+        // $scope.age = 19;
+        // $scope.phone = "099992392";
+            $scope.info = [{
+                name:"nguyễn văn a",
+                age: 20,
+                phone:"099292929"
+            },
+            {
+                name:"nguyễn văn b",
+                age: 30,
+                phone:"030303003"
+            },
+            {
+                name:"nguyễn văn c",
+                age: 30,
+                phone:"030303003"
+            }
+            ];
+    })
+</script>
+</html>
