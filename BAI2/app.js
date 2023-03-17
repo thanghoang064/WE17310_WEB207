@@ -22,7 +22,17 @@ app.controller("infoController",function ($scope) {
         }
         ];
         $scope.sayHello = function() {
-            $scope.hihi = ($scope.gioitinh == 1) ? "Nam" : "Nữ";
+            let gioitinh = ($scope.gioitinh == 1) ? "Ông" : "Bà";
+            let hoten = $scope.hoten;
+            let tuoi = new Date().getFullYear() - $scope.namsinh;
+            let checkDK = "";
+            if (tuoi >= 18 && tuoi <= 27) {
+                checkDK = "Có";
+            } else {
+                checkDK = "Không";
+            }
+            let str = gioitinh + hoten + checkDK + "đi NVQS";
+            $scope.hihi = str;
         }
         $scope.count = 0;
         $scope.myMouse = function() {
