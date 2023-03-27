@@ -5,7 +5,11 @@ window.GioiThieuController = function($scope,$routeParams) {
     $scope.kiemTraDuLieu = {
         ten:false, // chua co loi
         tuoi:false // chua co loi
-    }
+    };
+    $scope.danhsach = [
+        {id:1,ten:"Đỗ phương nam",tuoi:19},
+        {id:2,ten:"Nguyễn văn thạch",tuoi:20},
+    ];
     $scope.onSubmitForm = function() {
         // check validate bỏ trống 
     

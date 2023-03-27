@@ -13,4 +13,16 @@
     
     </table>
     <button ng-click="onSubmitForm()">Tao moi</button>
+    <table border="1">
+        <tr>
+            <td>Id</td>
+            <td>Tên</td>
+            <td>Tuổi</td>
+        </tr>
+        <tr ng-repeat="ds in danhsach">
+            <td>{{ ds.id }}</td>
+            <td>{{ ds.ten }}</td>
+            <td>{{ ds.tuoi }}</td>
+        </tr>
+    </table>
 </div>
