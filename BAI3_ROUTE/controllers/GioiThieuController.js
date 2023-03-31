@@ -1,15 +1,32 @@
-window.GioiThieuController = function($scope,$routeParams) {
+window.GioiThieuController = function($scope,$routeParams,$http) {
     //routeParams lấy ra object các tham số trên url
     // console.log($routeParams.name);
     // tao ra 1 doi tuong kiemtradulieu 
+    //Tham số $http hỗ trợ gọi api 
     $scope.kiemTraDuLieu = {
         ten:false, // chua co loi
         tuoi:false // chua co loi
     };
-    $scope.danhsach = [
-        {id:1,ten:"Đỗ phương nam",tuoi:19},
-        {id:2,ten:"Nguyễn văn thạch",tuoi:20},
-    ];
+    let apiUrl = "http://localhost:3000/haha";
+    $scope.getData = function() {
+        //gọi api sử dụng phương thức get để lấy toàn bộ dữ liệu
+        $http.get(apiUrl).then(
+            function(reponse) {
+                // sau khi đón được thành công dữ liệu thì dữ liệu sẽ nằm ở
+                //reponse
+                if(reponse.status == 200) {
+                     console.log(reponse);
+                    $scope.danhsach = reponse.data;
+                }
+                
+            }
+        )
+    }
+    $scope.getData();
+    // $scope.danhsach = [
+    //     {id:1,ten:"Đỗ phương nam",tuoi:19},
+    //     {id:2,ten:"Nguyễn văn thạch",tuoi:20},
+    // ];
     $scope.onClose = function() {
         //reset lại input
         $scope.inputValue = {
