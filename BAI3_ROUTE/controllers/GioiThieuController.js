@@ -52,12 +52,25 @@ window.GioiThieuController = function($scope,$routeParams,$http) {
             let editId = $scope.editId;
             //nếu như tồn tại biến editId thực hiện sửa 
             if(editId) {
-                for(let i = 0;i< $scope.danhsach.length;i++) {
-                    if($scope.danhsach[i].id == editId) {
-                        $scope.danhsach[i].ten = $scope.inputValue.ten;
-                        $scope.danhsach[i].tuoi =  $scope.inputValue.tuoi;
+                // for(let i = 0;i< $scope.danhsach.length;i++) {
+                //     if($scope.danhsach[i].id == editId) {
+                //         $scope.danhsach[i].ten = $scope.inputValue.ten;
+                //         $scope.danhsach[i].tuoi =  $scope.inputValue.tuoi;
+                //     }
+                // }
+                let updateItem = {
+                    ten: $scope.inputValue.ten,
+                    tuoi:$scope.inputValue.tuoi
+                } 
+                // lấy dữ liệu người dùng nhập vào để gán vào đối tượng updateItem
+                $http.put(
+                    `${apiUrl}/${editId}`, // url api sửa theo editId
+                    updateItem // đối tượng cần cập nhập 
+                ).then(function(reponse){
+                    if(reponse.status == 200) {
+                        $scope.getData();
                     }
-                }
+                })
                 $scope.onClose();
                 return;
             }
