@@ -7,7 +7,7 @@ window.GioiThieuController = function($scope,$routeParams,$http) {
         ten:false, // chua co loi
         tuoi:false // chua co loi
     };
-    let apiUrl = "http://localhost:3000/haha";
+    let apiUrl = "http://localhost:3000/posts";
     $scope.getData = function() {
         //gọi api sử dụng phương thức get để lấy toàn bộ dữ liệu
         $http.get(apiUrl).then(
@@ -62,38 +62,62 @@ window.GioiThieuController = function($scope,$routeParams,$http) {
                 return;
             }
             //xử lý thêm 
-            let ds = $scope.danhsach;
+            // let ds = $scope.danhsach;
             //fake id tăng tự động 
-            let newId = ds.length > 0 ? ds[ds.length-1].id + 1 : 1;
+            // let newId = ds.length > 0 ? ds[ds.length-1].id + 1 : 1;
             //tạo 1 đối tượng để thêm mới vào array
             let newItem = {
-                id:newId,
+                // id:newId,
                 ten:$scope.inputValue.ten,
                 tuoi:$scope.inputValue.tuoi
             };
+            // gọi api để post dữ liệu vào json server
+            $http.post(
+                apiUrl,//đường dẫn API
+                newItem // cục dữ liệu để thêm mới 
+            ).then(
+                function (reponse) {
+                    // console.log(reponse);
+                    if(reponse.status == 201) {
+                        $scope.getData();
+                    }
+                }
+            )
             //push đối tượng đó vào mảng 
-            $scope.danhsach.push(newItem);
+            // $scope.danhsach.push(newItem);
             $scope.onClose();
         }
     }
     $scope.onEdit = function(editId) {
         $scope.editId = editId;
         // tạo 1 đối tượng sửa 
-        let editItem  = {
-            ten:"",
-            tuoi:""
-        }
-        for(let i = 0;i < $scope.danhsach.length;i++) {
-            if($scope.danhsach[i].id == editId) {
-                editItem.ten = $scope.danhsach[i].ten;
-                editItem.tuoi = $scope.danhsach[i].tuoi;
+        // let editItem  = {
+        //     ten:"",
+        //     tuoi:""
+        // }
+        // for(let i = 0;i < $scope.danhsach.length;i++) {
+        //     if($scope.danhsach[i].id == editId) {
+        //         editItem.ten = $scope.danhsach[i].ten;
+        //         editItem.tuoi = $scope.danhsach[i].tuoi;
+        //     }
+        // }
+        // call api 
+        $http.get(`${apiUrl}/${editId}`).then( // get khi thành công nó trả về status 200
+            function (reponse) {
+                if(reponse.status == 200) {
+                    //bắn dữ liệu lên form
+                    $scope.inputValue = {
+                        ten:reponse.data.ten,
+                        tuoi:reponse.data.tuoi
+                    }
+                }
             }
-        }
+        )
         // bắn thông tin cầng sửa lên form 
-        $scope.inputValue = {
-            ten:editItem.ten,
-            tuoi:editItem.tuoi
-        }
+        // $scope.inputValue = {
+        //     ten:editItem.ten,
+        //     tuoi:editItem.tuoi
+        // }
 
     }
 }
