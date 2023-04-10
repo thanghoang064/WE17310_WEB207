@@ -1,8 +1,9 @@
-window.GioiThieuController = function($scope,$routeParams,$http) {
+window.GioiThieuController = function($scope,$routeParams,$http,$location) {
     //routeParams lấy ra object các tham số trên url
     // console.log($routeParams.name);
     // tao ra 1 doi tuong kiemtradulieu 
     //Tham số $http hỗ trợ gọi api 
+  
     $scope.kiemTraDuLieu = {
         ten:false, // chua co loi
         tuoi:false // chua co loi
@@ -103,6 +104,7 @@ window.GioiThieuController = function($scope,$routeParams,$http) {
     }
     $scope.onEdit = function(editId) {
         $scope.editId = editId;
+        $location.path(`trang-chu/${editId}/page`);
         // tạo 1 đối tượng sửa 
         // let editItem  = {
         //     ten:"",

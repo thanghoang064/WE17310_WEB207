@@ -32,7 +32,7 @@
 </body>
 <script>
     angular.module('app-route',['ngRoute']).config(function($routeProvider){
-        $routeProvider.when('/trang-chu',{ // tên route là trang-chu
+        $routeProvider.when('/trang-chu/:id/page',{ // tên route là trang-chu
             templateUrl : 'views/trangchu.html', //đường dẫn đến view
             controller: TrangChuController
         }).when('/gioi-thieu/:name',{ // tên route là trang-chu
